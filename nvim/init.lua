@@ -27,6 +27,8 @@ vim.o.splitbelow = true
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+vim.opt.colorcolumn = "100"
+
 -- Preview substitutions live, as you type!
 vim.o.inccommand = "split"
 
@@ -774,11 +776,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 		opts = {},
 	},
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
+	require("plugins.harpoon"),
 	require("plugins.debug"),
 	require("plugins.lint"),
 	require("plugins.gitsign"),
