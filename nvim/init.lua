@@ -26,6 +26,8 @@ vim.o.splitbelow = true
 --  and `:help 'listchars'`
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 vim.opt.colorcolumn = "100"
 
@@ -125,7 +127,7 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
+	-- "NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 	-- See `:help gitsigns` to understand what the configuration keys do
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -187,7 +189,7 @@ require("lazy").setup({
 			spec = {
 				{ "<leader>s", group = "[S]earch" },
 				{ "<leader>t", group = "[T]oggle" },
-				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+				{ "<leader>g", group = "[G]it Hunk", mode = { "n", "v" } },
 			},
 		},
 	},
