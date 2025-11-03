@@ -1,0 +1,83 @@
+// -*- mode: jsonc -*-
+{
+	"reload_style_on_change": true,
+	"layer": "top", // Waybar at top layer
+	"position": "top", // Waybar position (top|bottom|left|right)
+	"height": 30, // Waybar height (to be removed for auto height)
+	"spacing": 0,
+	"modules-left": [
+		"hyprland/workspaces"
+	],
+	"modules-center": [
+		"clock"
+	],
+	"modules-right": [
+		"tray",
+		"cpu",
+		"memory",
+		"hyprland/language",
+		"pulseaudio",
+		"bluetooth",
+		"network"
+	],
+	"hyprland/language": {
+		"format-en": "en",
+		"format-ru": "ru"
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
+	},
+	"bluetooth": {
+		"format": "",
+		"format-disabled": "󰂲",
+		"format-connected": "",
+		"tooltip-format": "Devices connected: {num_connections}",
+		"on-click": "blueman-manager"
+	},
+	"clock": {
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format": "{:L%a, %H:%M}",
+		"format-alt": "{:L%d %B %Y}"
+	},
+	"cpu": {
+		"format": "{usage}% ",
+		"on-click": "$TERMINAL -e btop"
+	},
+	"memory": {
+		"format": "{}% ",
+		"on-click": "$TERMINAL -e btop"
+	},
+	"network": {
+		"format-icons": [
+			"󰤯",
+			"󰤟",
+			"󰤢",
+			"󰤥",
+			"󰤨"
+		],
+		"format": "{icon}",
+		"format-wifi": "{icon}",
+		"format-ethernet": "󰀂",
+		"format-disconnected": "󰤮",
+		"tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+		"tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+		"tooltip-format-disconnected": "Disconnected",
+		"interval": 3,
+		"spacing": 1
+	},
+	"pulseaudio": {
+		// "scroll-step": 1, // %, can be a float
+		"format": "{volume}% {icon}",
+		"format-muted": " ",
+		"format-icons": {
+			"default": [
+				"",
+				" ",
+				" "
+			]
+		},
+		"on-click": "pavucontrol",
+		"on-click-right": "pamixer -t"
+	}
+}
