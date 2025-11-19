@@ -6,6 +6,9 @@ vim.o.relativenumber = true
 vim.o.mouse = "a"
 vim.o.showmode = false
 
+-- NETRW
+vim.g.netrw_banner = 0
+
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
@@ -461,8 +464,21 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
+				gopls = {
+					root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "."),
+				},
+				pyright = {},
+				postgres_lsp = {
+					{
+						cmd = { "postgres-language-server", "lsp-proxy" },
+						filetypes = {
+							"sql",
+							"psql",
+						},
+						root_markers = { "postgres-language-server.jsonc" },
+					},
+				},
+
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
