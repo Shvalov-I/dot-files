@@ -798,6 +798,7 @@ require("lazy").setup({
 	require("plugins.debug"),
 	require("plugins.lint"),
 	require("plugins.gitsign"),
+	require("plugins.oil"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
