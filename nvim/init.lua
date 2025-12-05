@@ -69,10 +69,10 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -239,6 +239,12 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+			vim.keymap.set(
+				"n",
+				"<leader>sF",
+				":Telescope find_files hidden=true<CR>",
+				{ desc = "[S]earch Hidden [F]iles" }
+			)
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
@@ -334,7 +340,7 @@ require("lazy").setup({
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
@@ -465,12 +471,18 @@ require("lazy").setup({
 			local servers = {
 				-- clangd = {},
 				gopls = {
+					completeUnimported = true,
+					workspace = {
+						expandWorkspaceToModule = true,
+					},
 					root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "."),
 				},
-				pyright = {},
+				ltex = {
+					language = "ru-RU",
+					enabled = { "go", "markdown", "plaintext" },
+				},
 				postgres_lsp = {
 					{
-						cmd = { "postgres-language-server", "lsp-proxy" },
 						filetypes = {
 							"sql",
 							"psql",
@@ -642,6 +654,11 @@ require("lazy").setup({
 				-- See :h blink-cmp-config-keymap for defining your own keymap
 				preset = "default",
 
+				["C-space"] = false,
+				["<C-i>"] = { "show", "show_documentation", "hide_documentation" },
+				["<Tab>"] = false,
+				["<S-Tab>"] = false,
+
 				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			},
@@ -799,6 +816,7 @@ require("lazy").setup({
 	require("plugins.lint"),
 	require("plugins.gitsign"),
 	require("plugins.oil"),
+	require("plugins.go"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
