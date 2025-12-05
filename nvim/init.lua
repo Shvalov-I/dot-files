@@ -9,6 +9,10 @@ vim.o.showmode = false
 -- NETRW
 vim.g.netrw_banner = 0
 
+-- Spell checker
+vim.opt.spell = true
+vim.opt.spelllang = "en_us,ru"
+
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
