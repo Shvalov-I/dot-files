@@ -14,6 +14,9 @@ return {
 		-- Creates a beautiful debugger UI
 		"rcarriga/nvim-dap-ui",
 
+		-- Inline text
+		"theHamsta/nvim-dap-virtual-text",
+
 		-- Required dependency for nvim-dap-ui
 		"nvim-neotest/nvim-nio",
 

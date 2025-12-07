@@ -481,20 +481,6 @@ require("lazy").setup({
 					},
 					root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "."),
 				},
-				ltex = {
-					language = "ru-RU",
-					enabled = { "go", "markdown", "plaintext" },
-				},
-				postgres_lsp = {
-					{
-						filetypes = {
-							"sql",
-							"psql",
-						},
-						root_markers = { "postgres-language-server.jsonc" },
-					},
-				},
-
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
