@@ -35,7 +35,6 @@ return {
 						path = "%:p:h", -- open from within the folder of your current buffer
 						display_stat = false, -- don't show file stat
 						grouped = true, -- group initial sorting by directories and then files
-						hidden = true, -- show hidden files
 						hide_parent_dir = true, -- hide `../` in the file browser
 						hijack_netrw = true, -- use telescope file browser when opening directory paths
 						prompt_path = true, -- show the current relative path from cwd as the prompt prefix
@@ -54,12 +53,12 @@ return {
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set(
-				"n",
-				"<leader>sF",
-				":Telescope find_files hidden=true<CR>",
-				{ desc = "[S]earch Hidden [F]iles" }
-			)
+			vim.keymap.set("n", "<leader>sF", function()
+				builtin.find_files({
+					hidden = true,
+					no_ignore = true,
+				})
+			end, { desc = "[S]earch All [F]iles (Hidden + Gitignore)" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
@@ -96,8 +95,27 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
+			-- Shortcuts for File Browser
+			local fb_actions = require("telescope").extensions.file_browser.actions
+			local fb_state = { toggle_both = false }
+
+			local function toggle_gitignore_hidden(prompt_bufnr)
+				fb_state.toggle_both = not fb_state.toggle_both
+				local opts = require("telescope.actions.state").get_current_picker(prompt_bufnr):get_picker_opts()
+				opts.hidden = { file_browser = fb_state.toggle_both, folder_browser = fb_state.toggle_both }
+				opts.no_ignore = fb_state.toggle_both
+				opts.respect_gitignore = not fb_state.toggle_both
+				require("telescope.actions").close(prompt_bufnr)
+				require("telescope.builtin").file_browser(opts)
+			end
+
 			vim.keymap.set("n", "<space>-", function()
-				require("telescope").extensions.file_browser.file_browser()
+				require("telescope").extensions.file_browser.file_browser({
+					mappings = {
+						i = { ["<C-h>"] = toggle_gitignore_hidden },
+						n = { ["<C-h>"] = toggle_gitignore_hidden },
+					},
+				})
 			end, { desc = "File Browser" })
 		end,
 	},
