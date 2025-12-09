@@ -12,12 +12,48 @@ shell zsh
 remember_window_size  no
 initial_window_width  120c
 initial_window_height 30c
-hide_window_decoration titlebar-only
 
 # BEGIN_KITTY_FONTS
 font_family      family='JetBrainsMono Nerd Font Mono' postscript_name=JetBrainsMonoNFM-Regular
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
-font_size 20.0
 # END_KITTY_FONTS
+
+font_size 20
+dynamic_background_opacity yes
+background_opacity 0.97
+
+# MacOS settings
+macos_option_as_alt yes
+
+map cmd+s send_key ctrl+s
+map cmd+w send_key ctrl+w
+map cmd+v send_key ctrl+v
+map cmd+c send_key ctrl+c
+map cmd+r send_key ctrl+r
+map cmd+o send_key ctrl+o
+map cmd+t send_key ctrl+t
+map cmd+h send_key ctrl+h
+
+map cmd+d send_key ctrl+d
+map cmd+u send_key ctrl+u
+
+
+map cmd+y send_key ctrl+y
+map cmd+n send_key ctrl+n
+map cmd+p send_key ctrl+p
+map cmd+i send_key ctrl+i
+
+# neovim move in windows
+map cmd+j send_key ctrl+j
+map cmd+k send_key ctrl+k
+map cmd+l send_key ctrl+l
+map cmd+; send_key ctrl+;
+
+# Tmux
+map cmd+a send_key ctrl+a
+
+# copy paste
+map cmd+shift+c copy_to_clipboard
+map cmd+shift+v paste_from_clipboard
