@@ -122,6 +122,18 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- Autosave command
+local group = vim.api.nvim_create_augroup("Autosave", { clear = true })
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+	group = group,
+	pattern = "*",
+	callback = function()
+		if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+			vim.cmd("silent write")
+		end
+	end,
+})
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
