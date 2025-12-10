@@ -161,7 +161,7 @@ require("lazy").setup({
 	require("plugins.debug"),
 	require("plugins.lint"),
 	require("plugins.gitsign"),
-	-- require("plugins.oil"),
+	require("plugins.oil"),
 	require("plugins.go"),
 }, {
 	ui = {

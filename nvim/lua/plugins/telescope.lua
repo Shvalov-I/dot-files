@@ -4,7 +4,6 @@ return {
 		event = "VimEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
 			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
 				"nvim-telescope/telescope-fzf-native.nvim",
 
@@ -47,7 +46,6 @@ return {
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "file_browser")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -95,29 +93,6 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
-
-			-- Shortcuts for File Browser
-			local fb_actions = require("telescope").extensions.file_browser.actions
-			local fb_state = { toggle_both = false }
-
-			local function toggle_gitignore_hidden(prompt_bufnr)
-				fb_state.toggle_both = not fb_state.toggle_both
-				local opts = require("telescope.actions.state").get_current_picker(prompt_bufnr):get_picker_opts()
-				opts.hidden = { file_browser = fb_state.toggle_both, folder_browser = fb_state.toggle_both }
-				opts.no_ignore = fb_state.toggle_both
-				opts.respect_gitignore = not fb_state.toggle_both
-				require("telescope.actions").close(prompt_bufnr)
-				require("telescope.builtin").file_browser(opts)
-			end
-
-			vim.keymap.set("n", "<space>-", function()
-				require("telescope").extensions.file_browser.file_browser({
-					mappings = {
-						i = { ["<C-h>"] = toggle_gitignore_hidden },
-						n = { ["<C-h>"] = toggle_gitignore_hidden },
-					},
-				})
-			end, { desc = "File Browser" })
 		end,
 	},
 }
