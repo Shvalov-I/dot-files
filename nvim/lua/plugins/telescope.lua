@@ -33,7 +33,6 @@ return {
 					},
 				},
 				defaults = {
-					preview = false,
 					mappings = {
 						i = {
 							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
@@ -41,6 +40,11 @@ return {
 						n = {
 							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
 						},
+					},
+				},
+				pickers = {
+					lsp_document_symbols = {
+						symbol_width = 50,
 					},
 				},
 			})
