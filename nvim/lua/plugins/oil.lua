@@ -1,9 +1,9 @@
 return {
 	{
 		"stevearc/oil.nvim",
-		dependencies = { 
+		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			 "benomahony/oil-git.nvim",
+			"benomahony/oil-git.nvim",
 		},
 		config = function()
 			require("oil").setup({
@@ -18,8 +18,6 @@ return {
 			})
 
 			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
-			vim.keymap.set("n", "<leader>-", require("oil").toggle_float)
 		end,
 	},
 }

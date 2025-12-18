@@ -31,20 +31,14 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
-				},
-				defaults = {
-					mappings = {
-						i = {
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-						},
-						n = {
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-						},
-					},
-				},
-				pickers = {
-					lsp_document_symbols = {
-						symbol_width = 50,
+					file_browser = {
+						path = "%:p:h", -- open from within the folder of your current buffer
+						display_stat = false, -- don't show file stat
+						grouped = true, -- group initial sorting by directories and then files
+						hide_parent_dir = true, -- hide `../` in the file browser
+						hijack_netrw = true, -- use telescope file browser when opening directory paths
+						prompt_path = true, -- show the current relative path from cwd as the prompt prefix
+						use_fd = true, -- use `fd` instead of plenary, make sure to install `fd`
 					},
 				},
 			})
@@ -52,6 +46,7 @@ return {
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "file_browser")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -99,6 +94,28 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			-- Shortcuts for File Browser
+			local fb_state = { toggle_both = false }
+
+			local function toggle_gitignore_hidden(prompt_bufnr)
+				fb_state.toggle_both = not fb_state.toggle_both
+				local opts = require("telescope.actions.state").get_current_picker(prompt_bufnr):get_picker_opts()
+				opts.hidden = { file_browser = fb_state.toggle_both, folder_browser = fb_state.toggle_both }
+				opts.no_ignore = fb_state.toggle_both
+				opts.respect_gitignore = not fb_state.toggle_both
+				require("telescope.actions").close(prompt_bufnr)
+				require("telescope.builtin").file_browser(opts)
+			end
+
+			vim.keymap.set("n", "<space>-", function()
+				require("telescope").extensions.file_browser.file_browser({
+					mappings = {
+						i = { ["<C-h>"] = toggle_gitignore_hidden },
+						n = { ["<C-h>"] = toggle_gitignore_hidden },
+					},
+				})
+			end, { desc = "File Browser" })
 		end,
 	},
 }
