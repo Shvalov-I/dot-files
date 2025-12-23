@@ -40,20 +40,20 @@ return {
 						prompt_path = true, -- show the current relative path from cwd as the prompt prefix
 						use_fd = true, -- use `fd` instead of plenary, make sure to install `fd`
 					},
-					defaults = {
-						mappings = {
-							i = {
-								["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-							},
-							n = {
-								["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-							},
+				},
+				defaults = {
+					mappings = {
+						i = {
+							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+						},
+						n = {
+							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
 						},
 					},
-					pickers = {
-						lsp_document_symbols = {
-							symbol_width = 50,
-						},
+				},
+				pickers = {
+					lsp_document_symbols = {
+						symbol_width = 50,
 					},
 				},
 			})
