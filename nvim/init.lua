@@ -166,8 +166,8 @@ require("lazy").setup({
 	require("plugins.lint"),
 	require("plugins.gitsign"),
 	require("plugins.oil"),
-	require("plugins.go"),
 	require("plugins.diffview"),
+	require("plugins.dadbod"),
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
