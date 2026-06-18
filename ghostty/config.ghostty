@@ -1,0 +1,47 @@
+# --- Размеры окна ---
+window-width = 120
+window-height = 30
+window-save-state = never
+
+theme = TokyoNight
+
+# --- Шрифт ---
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 20
+
+# --- macOS ---
+macos-option-as-alt = true
+
+# --- Keybinds: отправка Ctrl-комбинаций внутрь терминала ---
+
+keybind = cmd+s=text:\x13
+keybind = cmd+w=text:\x17
+keybind = cmd+v=text:\x16
+keybind = cmd+c=text:\x03
+keybind = cmd+r=text:\x12
+keybind = cmd+o=text:\x0f
+keybind = cmd+t=text:\x14
+keybind = cmd+h=text:\x08
+
+keybind = cmd+d=text:\x04
+keybind = cmd+u=text:\x15
+keybind = cmd+y=text:\x19
+keybind = cmd+n=text:\x0e
+keybind = cmd+p=text:\x10
+keybind = cmd+i=text:\x09
+
+# --- Neovim окна ---
+keybind = cmd+j=text:\x0a
+keybind = cmd+k=text:\x0b
+keybind = cmd+l=text:\x0c
+
+# Уберём проблемный cmd+semicolon, раз с ним больше всего нюансов.
+# Если нужно, потом повесим его на простой текст ";".
+# keybind = cmd+semicolon=text:;
+
+# --- Tmux prefix ---
+keybind = cmd+a=text:\x01
+
+# --- Copy / Paste через действия Ghostty ---
+keybind = cmd+shift+c=copy_to_clipboard
+keybind = cmd+shift+v=paste_from_clipboard

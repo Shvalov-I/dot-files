@@ -204,6 +204,9 @@ return {
 					},
 					completionBudget = "500ms",
 				},
+				graphql = {
+					root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "."),
+				},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
