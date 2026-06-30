@@ -75,6 +75,8 @@ do
   --   and `:help lua-guide-options`
   vim.o.list = true
   vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+  vim.opt.tabstop = 4
+  vim.opt.shiftwidth = 4
 
   -- Preview substitutions live, as you type!
   vim.o.inccommand = 'split'
@@ -932,7 +934,7 @@ do
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   require 'plugins.debug'
-  require 'plugins.indent_line'
+  -- require 'plugins.indent_line'
   require 'plugins.lint'
   require 'plugins.autopairs'
   require 'plugins.dadbod'
