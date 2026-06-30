@@ -282,13 +282,13 @@ do
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
   require('gitsigns').setup {
-    signs = {
-      add = { text = '+' }, ---@diagnostic disable-line: missing-fields
-      change = { text = '~' }, ---@diagnostic disable-line: missing-fields
-      delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
-      topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
-      changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
-    },
+    -- signs = {
+    --   add = { text = '+' }, ---@diagnostic disable-line: missing-fields
+    --   change = { text = '~' }, ---@diagnostic disable-line: missing-fields
+    --   delete = { text = '_' }, ---@diagnostic disable-line: missing-fields
+    --   topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
+    --   changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
+    -- },
   }
 
   -- Useful plugin to show you pending keybinds.
@@ -301,7 +301,7 @@ do
     spec = {
       { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
       { '<leader>t', group = '[T]oggle' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+      { '<leader>g', group = '[G]it hunk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
     },
   }
