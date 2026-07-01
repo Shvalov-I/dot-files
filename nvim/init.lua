@@ -490,7 +490,7 @@ do
       -- Jump to the definition of the word under your cursor.
       -- This is where a variable was first declared, or where a function is defined, etc.
       -- To jump back, press <C-t>.
-      vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
 
       -- Fuzzy find all the symbols in your current document.
       -- Symbols are things like variables, functions, types, etc.
@@ -655,6 +655,11 @@ do
         unusedparams = true,
       },
       completionBudget = '500ms',
+    },
+    buf_ls = {
+      cmd = { 'buf', 'lsp', 'serve' },
+      filetypes = { 'proto', 'buf-config' },
+      root_markers = { 'buf.yaml', '.git' },
     },
     -- pyright = {},
     -- rust_analyzer = {},
@@ -940,6 +945,7 @@ do
   require 'plugins.dadbod'
   require 'plugins.harpoon'
   require 'plugins.oil'
+  require 'plugins.diffview'
   require 'plugins.gitsigns' -- adds gitsigns recommended keymaps
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
