@@ -9,6 +9,7 @@ do
   -- Spell checker
   vim.opt.spell = true
   vim.opt.spelllang = 'en_us,ru'
+  vim.opt.colorcolumn = '100'
 
   -- Set <space> as the leader key
   -- See `:help mapleader`
@@ -105,6 +106,8 @@ do
   --  See `:help hlsearch`
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
   vim.keymap.set('n', '<C-s>', ':update<CR>', { noremap = true, silent = true })
+  vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
+  vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
   -- Diagnostic Config & Keymaps
   --  See `:help vim.diagnostic.Opts`
@@ -460,7 +463,17 @@ do
   vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
   vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
   vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-  vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+  vim.keymap.set(
+    'n',
+    '<leader><leader>',
+    function()
+      require('telescope.builtin').buffers {
+        sort_mru = true,
+        ignore_current_buffer = true,
+      }
+    end,
+    { desc = '[ ] Find existing buffers' }
+  )
   vim.keymap.set(
     'n',
     '<leader>sF',
